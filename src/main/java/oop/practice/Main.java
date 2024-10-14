@@ -163,7 +163,6 @@ public class Main {
                 outputArray.add(obj.toJsonNode(mapper));
             }
 
-            // Write to file
             mapper.writerWithDefaultPrettyPrinter().writeValue(outputFile, outputArray);
         }
 
