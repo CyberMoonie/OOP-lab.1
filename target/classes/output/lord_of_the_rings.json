@@ -1,0 +1,25 @@
+[ {
+  "id" : 5,
+  "age" : 451,
+  "planet" : "Earth",
+  "traits" : [ "BLONDE", "POINTY_EARS" ],
+  "universe" : "Lord of the Rings"
+}, {
+  "id" : 6,
+  "age" : 124,
+  "planet" : "Earth",
+  "traits" : [ "SHORT", "BULKY" ],
+  "universe" : "Lord of the Rings"
+}, {
+  "id" : 12,
+  "age" : 7523,
+  "planet" : "Not Provided",
+  "traits" : [ ],
+  "universe" : "Lord of the Rings"
+}, {
+  "id" : 13,
+  "age" : 0,
+  "planet" : "Earth",
+  "traits" : [ "SHORT", "BULKY" ],
+  "universe" : "Lord of the Rings"
+} ]

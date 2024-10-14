@@ -1,0 +1,25 @@
+[ {
+  "id" : 2,
+  "age" : 2034,
+  "planet" : "Asgard",
+  "traits" : [ "BLONDE", "TALL" ],
+  "universe" : "Marvel"
+}, {
+  "id" : 9,
+  "age" : 0,
+  "planet" : "Asgard",
+  "traits" : [ "BLONDE", "TALL" ],
+  "universe" : "Marvel"
+}, {
+  "id" : 16,
+  "age" : 154,
+  "planet" : "Not Provided",
+  "traits" : [ "BLONDE", "TALL" ],
+  "universe" : "Marvel"
+}, {
+  "id" : 19,
+  "age" : 451,
+  "planet" : "Earth",
+  "traits" : [ "BLONDE", "TALL" ],
+  "universe" : "Marvel"
+} ]

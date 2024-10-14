@@ -1,0 +1,37 @@
+[ {
+  "id" : 3,
+  "age" : 59,
+  "planet" : "Betelgeuse",
+  "traits" : [ "EXTRA_ARMS", "EXTRA_HEAD" ],
+  "universe" : "Hitchhiker's Guide to the Galaxy"
+}, {
+  "id" : 4,
+  "age" : 128,
+  "planet" : "Vogsphere",
+  "traits" : [ "GREEN", "BULKY" ],
+  "universe" : "Hitchhiker's Guide to the Galaxy"
+}, {
+  "id" : 10,
+  "age" : 45,
+  "planet" : "Betelgeuse",
+  "traits" : [ "EXTRA_ARMS", "EXTRA_HEAD" ],
+  "universe" : "Hitchhiker's Guide to the Galaxy"
+}, {
+  "id" : 11,
+  "age" : 128,
+  "planet" : "Not Provided",
+  "traits" : [ "GREEN" ],
+  "universe" : "Hitchhiker's Guide to the Galaxy"
+}, {
+  "id" : 17,
+  "age" : 26,
+  "planet" : "Not Provided",
+  "traits" : [ "EXTRA_ARMS" ],
+  "universe" : "Hitchhiker's Guide to the Galaxy"
+}, {
+  "id" : 21,
+  "age" : 82,
+  "planet" : "Not Provided",
+  "traits" : [ "EXTRA_HEAD" ],
+  "universe" : "Hitchhiker's Guide to the Galaxy"
+} ]

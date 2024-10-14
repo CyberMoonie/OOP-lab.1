@@ -3,10 +3,14 @@ package oop.practice;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class Main {
 
@@ -75,7 +79,6 @@ public class Main {
             return "Unknown";
         }
 
-        // Getters
         public int getId() {
             return id;
         }
@@ -97,13 +100,28 @@ public class Main {
                    "\nUniverse: " + universe + 
                    "\n";
         }
+
+        // Convert the Object to a JsonNode for writing to files
+        public ObjectNode toJsonNode(ObjectMapper mapper) {
+            ObjectNode node = mapper.createObjectNode();
+            node.put("id", id);
+            node.put("age", age != null ? age : 0);
+            node.put("planet", planet != null ? planet : "Not Provided");
+            ArrayNode traitsNode = mapper.createArrayNode();
+            for (String trait : traits) {
+                traitsNode.add(trait);
+            }
+            node.set("traits", traitsNode);
+            node.put("universe", universe);
+            return node;
+        }
     }
 
     public static void main(String[] args) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         File inputFile = new File("src/main/resources/input.json");
 
-        // Read the entire input.json 
+        // Read the entire input.json
         JsonNode root = mapper.readTree(inputFile);
         if (root == null || !root.has("input")) {
             System.out.println("Error: The JSON file is empty or incorrectly formatted.");
@@ -111,25 +129,45 @@ public class Main {
         }
 
         List<Object> Objects = new ArrayList<>();
+        Map<String, List<Object>> universeMap = new HashMap<>(); // Store objects by universe
 
+        // Access the "input" array and populate the list
         JsonNode inputArray = root.get("input");
         for (JsonNode node : inputArray) {
-            int id = node.get("id").asInt();  
-            Integer age = node.has("age") ? node.get("age").asInt() : null; 
+            int id = node.get("id").asInt();
+            Integer age = node.has("age") ? node.get("age").asInt() : null;
             List<String> traits = new ArrayList<>();
             if (node.has("traits")) {
                 for (JsonNode trait : node.get("traits")) {
                     traits.add(trait.asText());
                 }
             }
-            String planet = node.has("planet") ? node.get("planet").asText() : null; 
+            String planet = node.has("planet") ? node.get("planet").asText() : null;
 
-            Objects.add(new Object(id, age, traits, planet));
+            // Create and classify the object
+            Object obj = new Object(id, age, traits, planet);
+            Objects.add(obj);
+
+            // Group by universe
+            universeMap.computeIfAbsent(obj.getUniverse(), k -> new ArrayList<>()).add(obj);
         }
 
-        System.out.println("Object Details:");
-        for (Object Object : Objects) {
-            System.out.println(Object);
+        // Output each group of objects to separate JSON files by universe
+        for (Map.Entry<String, List<Object>> entry : universeMap.entrySet()) {
+            String universe = entry.getKey().replaceAll(" ", "_").toLowerCase(); // Clean up universe names for filenames
+            File outputFile = new File("src/main/resources/output/" + universe + ".json");
+
+            // Prepare the output array
+            ArrayNode outputArray = mapper.createArrayNode();
+            for (Object obj : entry.getValue()) {
+                outputArray.add(obj.toJsonNode(mapper));
+            }
+
+            // Write to file
+            mapper.writerWithDefaultPrettyPrinter().writeValue(outputFile, outputArray);
         }
+
+        // Print confirmation
+        System.out.println("Objects have been classified and written to their respective universe files.");
     }
 }
